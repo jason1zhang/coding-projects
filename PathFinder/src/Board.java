@@ -1,12 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Board extends JPanel {
     private final int numOfCols;
     private final int numOfRows;
 
     private final Cell[] grid;
+    private final ArrayList<Cell> stack;
 
+    private final Cell start;
+    private final Cell end;
     private Cell current;
 
     /**
@@ -24,7 +28,15 @@ public class Board extends JPanel {
             }
         }
 
-        this.current = this.grid[0];
+        this.start = this.grid[0];
+        this.start.getWalls()[3] = false;
+        this.end = this.grid[grid.length - 1];
+        this.end.getWalls()[1] = false;
+        this.current = this.start;
+        stack = new ArrayList<>();
+
+        this.setBackground(Color.WHITE);
+
     }
 
     public int getIndex(int i, int j) {
@@ -57,10 +69,15 @@ public class Board extends JPanel {
 
             Cell next = this.current.findNeighbor(this);
             if (next != null) {
-                next.setVisited(true);
+                stack.add(this.current);
                 removeWalls(this.current, next);
+                next.setVisited(true);
+                this.current = next;
+            } else if (!stack.isEmpty()){
+                this.current = stack.remove(stack.size() - 1);
+            } else {
+                return;
             }
-            this.current = next;
         }
     }
 

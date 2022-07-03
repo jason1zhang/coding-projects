@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +73,7 @@ public class Cell {
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(5.0f));
-        g2.setColor(Color.GRAY);
+        g2.setColor(Color.DARK_GRAY);
 
         int PAD = 20;
 
@@ -98,7 +97,7 @@ public class Cell {
         }
 
         if (this.visited) {
-            g2.setColor(Color.DARK_GRAY);
+            g2.setColor(Color.WHITE);
             g2.fillRect(x0, y0, this.size, this.size);
         }
     }
