@@ -8,96 +8,60 @@ import java.util.NoSuchElementException;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class Stack<Item> implements Iterable<Item> {
-    private Node<Item> first;   // top of stack
-    private int n;              // size of the stack
+public class Bag<Item> implements Iterable<Item> {
+    private Node<Item> first;       // beginning of bag
+    private int n;                  // number of elements in bag
 
-    // helper linked list class
+    //helper linked list class
     private static class Node<Item> {
         private Item item;
         private Node<Item> next;
     }
 
     /**
-     * Initialize an empty stack
+     * Initializes an empty bag.
      */
-    public Stack() {
+    public Bag() {
         this.first = null;
         this.n = 0;
     }
 
     /**
-     * Return true if this stack is empty.
+     * Returns true if this bag is empty.
      *
-     * @return true if this stack is empty; false otherwise.
+     * @return {code true} if this bag is empty;
+     *          {@code false} otherwise
      */
     public boolean isEmpty() {
         return this.first == null;
     }
 
     /**
-     * Return the number of items in this stack.
+     * Returns the number of items in this bag.
      *
-     * @return the number of items in this stack.
+     * @return the number of items in this bag
      */
     public int size() {
         return this.n;
     }
 
     /**
-     * Add the item to this stack
+     * Adds the item to this bag.
      *
-     * @param item the item to add
+     * @param item the item to add to this bag
      */
-    public void push(Item item) {
+    public void add(Item item) {
         Node<Item> oldFirst = this.first;
-        this.first = new Node<>();
+        this.first = new Node<Item>();
         this.first.item = item;
         this.first.next = oldFirst;
         this.n++;
     }
 
-    public Item pop() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("Stack underflow");
-        }
-
-        Item item = this.first.item;    // save item to return
-        this.first = this.first.next;   // delete first node
-        this.n--;
-
-        return item;                    // return the saved item
-    }
-
     /**
-     * Return (but does not remove) the item most recently added to this stack
+     * Returns an iterator that iterates over the items in this bag in arbitrary order.
      *
-     * @return the item most recently added to this stack
-     * @throws NoSuchElementException if this stack is empty
-     */
-    public Item peek() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("Stack underflow");
-        }
-
-        return this.first.item;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        for (Item item : this) {
-            s.append(item);
-            s.append(' ');
-        }
-
-        return s.toString();
-    }
-
-    /**
-     * Returns an iterator to this stack that iterates through the items in LIFO order.
-     *
-     * @return an Iterator.
+     * @return an Iterator that iterates over the items in this bag in arbitrary order
      */
     @Override
     public Iterator<Item> iterator() {
@@ -108,8 +72,8 @@ public class Stack<Item> implements Iterable<Item> {
     private class LinkedIterator implements Iterator<Item> {
         private Node<Item> current;
 
-        public LinkedIterator(Node<Item> current) {
-            this.current = current;
+        public LinkedIterator(Node<Item> first) {
+            this.current = first;
         }
 
         /**
@@ -121,7 +85,7 @@ public class Stack<Item> implements Iterable<Item> {
          */
         @Override
         public boolean hasNext() {
-            return current != null;
+            return this.current != null;
         }
 
         /**
@@ -136,9 +100,8 @@ public class Stack<Item> implements Iterable<Item> {
                 throw new NoSuchElementException();
             }
 
-            Item item = current.item;
-            current = current.next;
-
+            Item item = this.current.item;
+            this.current = this.current.next;
             return item;
         }
 
@@ -166,8 +129,7 @@ public class Stack<Item> implements Iterable<Item> {
          */
         @Override
         public void remove() {
-            // Iterator.super.remove();
-            throw new UnsupportedOperationException();
+            Iterator.super.remove();
         }
 
         /**
@@ -247,21 +209,20 @@ public class Stack<Item> implements Iterable<Item> {
     }
 
     /**
-     * Unit tests the {@code Stack} data type.
+     * Unit tests the {@code Bag} data type.
      *
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        Stack<String> stack = new Stack<>();
+        Bag<String> bag = new Bag<>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
-            if (!item.equals("-")) {
-                stack.push(item);
-            } else if (!stack.isEmpty()) {
-                StdOut.print(stack.pop() + " ");
-            }
+            bag.add(item);
         }
 
-        StdOut.println("(" + stack.size() + " left on stack)");
+        StdOut.println("size of bag = " + bag.size());
+        for (String s : bag) {
+            StdOut.println(s);
+        }
     }
 }
