@@ -52,7 +52,7 @@ import com.algs4.io.StdOut;
  */
 
 public class QuickFindUF {
-    private int[] id;       // id[i] = component identifier of i
+    private final int[] id;       // id[i] = component identifier of i
     private int count;      // number of components
 
     /**
@@ -67,7 +67,7 @@ public class QuickFindUF {
         this.count = n;
         this.id = new int[n];
         for (int i = 0; i < n; i++) {
-            id[i] = i;
+            this.id[i] = i;
         }
     }
 
@@ -94,7 +94,7 @@ public class QuickFindUF {
 
     // validate that p is a valid index
     private void validate(int p) {
-        int n = id.length;
+        int n = this.id.length;
         if (p < 0 || p >= n) {
             throw new IllegalArgumentException("index " + p + " is not between 9 and " + (n-1));
         }
@@ -103,8 +103,8 @@ public class QuickFindUF {
     public void union(int p, int q) {
         validate(p);
         validate(q);
-        int pID = id[p];    // needed for correctness
-        int qID = id[q];    // to reduce the number of array accesses
+        int pID = this.id[p];    // needed for correctness
+        int qID = this.id[q];    // to reduce the number of array accesses
 
         // p and q are already in the same component
         if (pID == qID) {
