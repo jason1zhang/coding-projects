@@ -4,7 +4,7 @@ import com.algs4.io.StdIn;
 import com.algs4.io.StdOut;
 
 /**
- *  The {@code QuickFindUF} class represents a <em>union–find data type</em>
+ *  The {@code QuickUnionUF} class represents a <em>union–find data type</em>
  *  (also known as the <em>disjoint-sets data type</em>).
  *  It supports the classic <em>union</em> and <em>find</em> operations,
  *  along with a <em>count</em> operation that returns the total number
@@ -36,24 +36,24 @@ import com.algs4.io.StdOut;
  *  itself changes during a call to <em>union</em>&mdash;it cannot
  *  change during a call to either <em>find</em> or <em>count</em>.
  *  <p>
- *  This implementation uses <em>quick find</em>.
- *  The constructor takes &Theta;(<em>n</em>) time, where <em>n</em>
- *  is the number of sites.
- *  The <em>find</em>, <em>connected</em>, and <em>count</em>
- *  operations take &Theta;(1) time; the <em>union</em> operation
- *  takes &Theta;(<em>n</em>) time.
+ *  This implementation uses <em>quick union</em>.
+ *  The constructor takes &Theta;(<em>n</em>) time, where
+ *  <em>n</em> is the number of sites.
+ *  The <em>union</em> and <em>find</em> operations take
+ *  &Theta;(<em>n</em>) time in the worst case.
+ *  The <em>count</em> operation takes &Theta;(1) time.
  *  <p>
- *  For additional documentation, see
- *  <a href="https://algs4.cs.princeton.edu/15uf">Section 1.5</a> of
+ *  For additional documentation,
+ *  see <a href="https://algs4.cs.princeton.edu/15uf">Section 1.5</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
 
-public class QuickFindUF {
-    private final int[] id;     // id[i] = component identifier of i
-    private int count;          // number of components
+public class QuickUnionUF {
+    private final int[] parent;     // parent[i] = parent of i
+    private int count;              // number of components
 
     /**
      * Initializes an empty union-find data structure with
@@ -63,18 +63,18 @@ public class QuickFindUF {
      * @param n the number of elements
      * @throws IllegalArgumentException if {@code n < 0}
      */
-    public QuickFindUF(int n) {
+    public QuickUnionUF(int n) {
+        this.parent = new int[n];
         this.count = n;
-        this.id = new int[n];
         for (int i = 0; i < n; i++) {
-            this.id[i] = i;
+            this.parent[i] = i;
         }
     }
 
     /**
      * Returns the number of sets.
      *
-     * @return the number of sets (between {@code 1} and {@code n})
+     * @return the number of sets (between {@code 1} and {@code n}
      */
     public int count() {
         return this.count;
@@ -89,34 +89,37 @@ public class QuickFindUF {
      */
     public int find(int p) {
         validate(p);
-        return this.id[p];
+        while (p != this.parent[p]) {
+            p = this.parent[p];
+        }
+
+        return p;
     }
 
     // validate that p is a valid index
     private void validate(int p) {
-        int n = this.id.length;
+        int n = this.parent.length;
         if (p < 0 || p >= n) {
             throw new IllegalArgumentException("index " + p + " is not between 0 and " + (n-1));
         }
     }
 
+    /**
+     * Merges the set containing element {@code p} with
+     * the set containing element {@code q}.
+     *
+     * @param p one element
+     * @param q the other element
+     * @throws IllegalArgumentException unless
+     *          both {@code 0 <= p < n} and {@code 0 <= q < n}
+     */
     public void union(int p, int q) {
-        validate(p);
-        validate(q);
-        int pID = this.id[p];    // needed for correctness
-        int qID = this.id[q];    // to reduce the number of array accesses
-
-        // p and q are already in the same component
-        if (pID == qID) {
+        int rootP = find(p);
+        int rootQ = find(q);
+        if (rootP == rootQ) {
             return;
         }
-
-        for (int i = 0; i < this.id.length; i++) {
-            if (this.id[i] == pID) {
-                this.id[i] = qID;
-            }
-        }
-
+        this.parent[rootP] = rootQ;
         this.count--;
     }
 
@@ -131,7 +134,7 @@ public class QuickFindUF {
      */
     public static void main(String[] args) {
         int n = StdIn.readInt();
-        QuickFindUF uf = new QuickFindUF(n);
+        QuickUnionUF uf = new QuickUnionUF(n);
         while (!StdIn.isEmpty()) {
             int p = StdIn.readInt();
             int q = StdIn.readInt();
