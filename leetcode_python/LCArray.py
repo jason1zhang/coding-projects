@@ -1,6 +1,38 @@
 from typing import List
 
 class LCArray:
+
+    @staticmethod
+    def majority_element_1(nums: List[int]) -> int:
+        """
+        Leet code # 169
+
+        Given an array nums of size n, return the majority element.
+
+        The majority element is the element that appears more than ⌊n / 2⌋ times.
+        You may assume that the majority element always exists in the array.
+        """
+        counter = {}
+        for num in nums:
+            counter[num] = counter.get(num, 0) + 1
+
+        max_key, max_value = 0, 0
+
+        for key, value in counter.items():
+            if value > max_value:
+                max_value = value
+                max_key = key
+
+        return max_key
+
+    @staticmethod
+    def majority_element_2(nums: List[int]) -> int:
+        counter = {}
+        for num in nums:
+            counter[num] = counter.get(num, 0) + 1
+
+        return max(counter.keys(), key=counter.get)
+
     @staticmethod
     def remove_duplicates_from_sorted_array_II_1(nums: List[int]) -> int:
         """
