@@ -1,6 +1,27 @@
 from typing import List
 
 class LCArray:
+    @staticmethod
+    def rotate_array_1(nums: List[int], k: int) -> None:
+        """
+        Leet code # 189
+        Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
+
+        Do not return anything, modify nums in-place instead.
+        """
+        # Use one extra list
+        size = len(nums)
+        nums_copy = nums.copy()
+        for i, num in enumerate(nums):
+            nums_copy[(i + k) % size] = nums[i]
+
+        nums[:] = nums_copy[:]
+
+    @staticmethod
+    def rotate_array_2(nums: List[int], k: int) -> None:
+        # Circular replacement
+    
+
 
     @staticmethod
     def majority_element_1(nums: List[int]) -> int:

@@ -2,6 +2,8 @@ from LCArray import LCArray
 
 
 if __name__ == '__main__':
-    nums = [2,2,1,1,1,2,2]
-    print(LCArray.majority_element_2(nums))
+    nums = [1,2,3,4,5,6,7]
+    k = 3
+    LCArray.rotate_array_1(nums, k)
+    print(nums)
 
