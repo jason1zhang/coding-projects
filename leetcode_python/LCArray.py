@@ -1,6 +1,44 @@
 from typing import List
 
 class LCArray:
+
+    @staticmethod
+    def max_profit_1(prices: List[int]) -> int:
+        """
+        Leet Code # 121
+        
+        You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+        You want to maximize your profit by choosing a single day to buy one stock and choosing a different day
+        in the future to sell that stock.
+
+        Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+        """
+        # brute-force approach
+        size = len(prices)
+        profit = 0
+        for i in range(size):
+            for j in range(i + 1, size):
+                profit = max(profit, prices[j] - prices[i])
+
+        return profit
+
+    @staticmethod
+    def max_profit_2(prices: List[int]) -> int:
+        if not prices:
+            return 0
+
+        min_price = max(prices)
+        max_profit = 0
+
+        for price in prices:
+            if price < min_price:
+                min_price = price
+            elif (price - min_price) > max_profit:
+                max_profit = price - min_price
+
+        return max_profit
+
     @staticmethod
     def rotate_array_1(nums: List[int], k: int) -> None:
         """

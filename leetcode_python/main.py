@@ -2,8 +2,6 @@ from LCArray import LCArray
 
 
 if __name__ == '__main__':
-    nums = [1, 2, 3, 4, 5, 6, 7]
-    k = 3
-    LCArray.rotate_array_2(nums, k)
-    print(nums)
+    prices = [7,1,5,3,6,4]
+    print(LCArray.max_profit_2(prices))
 
