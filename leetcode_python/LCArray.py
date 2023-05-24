@@ -19,8 +19,16 @@ class LCArray:
 
     @staticmethod
     def rotate_array_2(nums: List[int], k: int) -> None:
-        # Circular replacement
-    
+        # Rotate the array 3 times
+        # Note: be careful with the indexing when reversing
+        size = len(nums)
+        k %= size
+        if k == 0:
+            return
+
+        nums[:] = nums[::-1]
+        nums[0: k] = nums[k - 1::-1]
+        nums[k: size] = nums[size - 1: k - 1: -1]
 
 
     @staticmethod
