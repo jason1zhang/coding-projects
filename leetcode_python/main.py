@@ -2,6 +2,6 @@ from LCArray import LCArray
 
 
 if __name__ == '__main__':
-    prices = [7,1,5,3,6,4]
-    print(LCArray.max_profit_II_1(prices))
+    nums = [2,3,1,1,4]
+    print(LCArray.can_jump_3(nums))
 

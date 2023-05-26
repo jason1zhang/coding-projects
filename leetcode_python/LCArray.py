@@ -2,6 +2,47 @@ from typing import List
 
 class LCArray:
     @staticmethod
+    def can_jump_1(nums: List[int]) -> bool:
+        """
+        Leet code # 55
+
+        You are given an integer array nums. You are initially positioned at the array's first index,
+        and each element in the array represents your maximum jump length at that position.
+
+        Return true if you can reach the last index, or false otherwise.
+        """
+        # Greedy algorithm
+        right_most, size = 0, len(nums)
+        for i in range(size):
+            if i > right_most:
+                return False
+            right_most = max(i + nums[i], right_most)
+
+        return True
+
+    @staticmethod
+    def can_jump_2(nums: List[int]) -> bool:
+        # Greedy algorithm 2
+        right_most, size = 0, len(nums)
+        for i in range(size):
+            if i <= right_most:
+                right_most = max(i + nums[i], right_most)
+                if right_most >= (size - 1):
+                    return True
+
+        return False
+
+    @staticmethod
+    def can_jump_3(nums: List[int]) -> bool:
+        # Start from the tail, and traverse backwards,but this approach is slightly worse than approach 2 above
+        left_most, size = len(nums) - 1, len(nums)
+        for i in range(size - 2, -1, -1):
+            if i + nums[i] >= left_most:
+                left_most = i
+
+        return left_most == 0
+
+    @staticmethod
     def max_profit_II(prices: List[int]) -> int:
         """
         Leet code # 122
