@@ -2,6 +2,27 @@ from typing import List
 
 class LCArray:
     @staticmethod
+    def h_index(citations: List[int]) -> int:
+        """
+        Leet Code # 274
+        
+        Given an array of integers citations where citations[i] is the number of citations a researcher
+        received for their ith paper, return the researcher's h-index.
+
+        According to the definition of h-index on Wikipedia: The h-index is defined as the maximum value of
+        h such that the given researcher has published at least h papers that have each been cited at least h times.
+        """
+        # sort the array reversely, then traverse the sorted array and calculate the h-index
+        reverse_sorted_citations = sorted(citations, reverse=True)
+
+        h, i, n = 0, 0, len(citations)
+        while i < n and reverse_sorted_citations[i] > h:
+            h += 1
+            i += 1
+
+        return h
+
+    @staticmethod
     def jump(nums: List[int]) -> int:
         """
         Leet code # 45
