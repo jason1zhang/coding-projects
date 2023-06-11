@@ -1,6 +1,56 @@
 from typing import List
 
 class LCArray:
+
+    @staticmethod
+    def product_except_self_2(nums: List[int]) -> List[int]:
+        """
+        Space optimized version
+        """
+        length = len(nums)
+        answer = [0] * length
+
+        answer[0] = 1
+        for i in range(1, length):
+            answer[i] = nums[i - 1] * answer[i - 1]
+
+        right = 1
+        for i in reversed(range(length)):
+            answer[i] = answer[i] * right
+            right *= nums[i]
+
+        return answer
+
+    @staticmethod
+    def product_except_self_1(nums: List[int]) -> List[int]:
+        """
+        Leet Code # 238 Product of Array Except Self
+        Given an integer array nums, return an array answer such that answer[i] is equal to the product of
+        all the elements of nums except nums[i].
+
+        The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+        You must write an algorithm that runs in O(n) time and without using the division operation.
+        """
+        length = len(nums)
+
+        # left_product is the product of all the left elements for an array element,
+        # and right_product is the product of all the right elements for that element.
+        left_product, right_product, answer = [0] * length, [0] * length, [0] * length
+
+        left_product[0] = 1  # for the first element, its left_product is 1
+        for i in range(1, length):
+            left_product[i] = nums[i - 1] * left_product[i - 1]
+
+        right_product[length - 1] = 1  # for the last element, its right_product is 1
+        for i in reversed(range(length - 1)):
+            right_product[i] = nums[i + 1] * right_product[i + 1]
+
+        for i in range(length):
+            answer[i] = left_product[i] * right_product[i]
+
+        return answer
+
     @staticmethod
     def h_index(citations: List[int]) -> int:
         """

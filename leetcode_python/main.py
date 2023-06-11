@@ -4,14 +4,8 @@ from RandomizedSet import RandomizedSet
 
 if __name__ == '__main__':
 
-    randomizedSet = RandomizedSet()
-    randomizedSet.insert(1)
-    randomizedSet.remove(2)
-    randomizedSet.insert(2)
-    randomizedSet.get_random()
-    randomizedSet.remove(1)
-    randomizedSet.insert(2)
-    randomizedSet.get_random()
+    nums = [1,2,3,4]
+    print(LCArray.product_except_self_2(nums))
 
 
 
