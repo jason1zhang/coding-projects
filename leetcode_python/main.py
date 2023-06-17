@@ -6,7 +6,7 @@ if __name__ == '__main__':
 
     gas = [2,3,4]
     cost = [3,4,3]
-    print(LCArray.can_complete_circuit(gas, cost))
+    print(LCArray.can_complete_circuit_2(gas, cost))
 
 
 

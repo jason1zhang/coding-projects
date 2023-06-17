@@ -1,8 +1,28 @@
+import sys
 from typing import List
 
 class LCArray:
     @staticmethod
-    def can_complete_circuit(gas: List[int], cost: List[int]) -> int:
+    def can_complete_circuit_2(gas: List[int], cost: List[int]) -> int:
+        """
+        Second solution with graph idea
+        """
+        n, spare, min_spare, min_index = len(gas), 0, sys.maxsize, 0
+        for i in range(n):
+            spare += (gas[i] - cost[i])
+            if spare < min_spare:
+                min_spare = spare
+                min_index = i
+
+        if spare < 0:
+            return -1
+        elif min_spare >= 0:
+            return 0
+        else:
+            return (min_index + 1) % n
+
+    @staticmethod
+    def can_complete_circuit_1(gas: List[int], cost: List[int]) -> int:
         """
         Leet code #134 Gas Station
 
