@@ -4,8 +4,9 @@ from RandomizedSet import RandomizedSet
 
 if __name__ == '__main__':
 
-    nums = [1,2,3,4]
-    print(LCArray.product_except_self_2(nums))
+    gas = [2,3,4]
+    cost = [3,4,3]
+    print(LCArray.can_complete_circuit(gas, cost))
 
 
 
