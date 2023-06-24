@@ -2,6 +2,78 @@ import sys
 from typing import List
 
 class LCArray:
+
+    @staticmethod
+    def longest_common_prefix_3(strs: List[str]) -> str:
+        """
+        Approach 3: divide and conquer
+        """
+        def lcp(start: int, end: int) -> str:
+            if start == end:
+                return strs[start]
+
+            mid = (start + end) // 2
+            lcp_left, lcp_right = lcp(start, mid), lcp(mid + 1, end)
+            min_length = min(len(lcp_left),len(lcp_right))
+
+            for i in range(min_length):
+                if lcp_left[i] != lcp_right[i]:
+                    return lcp_left[:i]
+
+            return lcp_left[:min_length]
+
+        return "" if not strs else lcp(0, len(strs) - 1)
+
+    @staticmethod
+    def longest_common_prefix_2(strs: List[str]) -> str:
+        """
+        Approach 2: scan the array vertically
+        """
+        if not strs:
+            return ""
+
+        length, count = len(strs[0]), len(strs)
+        for i in range(length):
+            c = strs[0][i]
+            if any(i == len(strs[j]) or strs[j][i] != c for j in range(1, count)):
+                return strs[0][:i]
+
+        return strs[0]
+
+    @staticmethod
+    def longest_common_prefix_1(strs: List[str]) -> str:
+        """
+        Leet code # 14
+
+        Write a function to find the longest common prefix string amongst an array of strings.
+
+        If there is no common prefix, return an empty string "".
+
+        Approach 1: scan the array horizontally
+        """
+        def lcp(str1: str, str2: str) -> str:
+            """
+            longest common prefix between two strings
+            """
+            length, index = min(len(str1), len(str2)), 0
+
+            while index < length and str1[index] == str2[index]:
+                index += 1
+
+            return str1[:index]
+
+        # if it's empty array of strings, return ""
+        if not strs:
+            return ""
+
+        prefix, count = strs[0], len(strs)
+        for i in range(1, count):
+            prefix = lcp(prefix, strs[i])
+            if not prefix:
+                break
+
+        return prefix
+
     @staticmethod
     def length_of_last_word(s: str) -> int:
         """

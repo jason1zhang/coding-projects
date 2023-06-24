@@ -3,8 +3,8 @@ from RandomizedSet import RandomizedSet
 
 
 if __name__ == '__main__':
-    s = "   fly me   to   the moon  "
-    print(LCArray.length_of_last_word(s))
+    strs = ["flower", "flow", "flight"]
+    print(LCArray.longest_common_prefix_3(strs))
 
 
 
