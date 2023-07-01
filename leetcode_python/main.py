@@ -3,8 +3,8 @@ from RandomizedSet import RandomizedSet
 
 
 if __name__ == '__main__':
-    strs = ["flower", "flow", "flight"]
-    print(LCArray.longest_common_prefix_3(strs))
+    s = "the sky is blue"
+    print(LCArray.reverse_words_2(s))
 
 
 

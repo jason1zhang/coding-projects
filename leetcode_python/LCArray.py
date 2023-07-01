@@ -1,7 +1,105 @@
+import collections
 import sys
 from typing import List
 
+
 class LCArray:
+
+    @staticmethod
+    def reverse_words_2(s: str) -> str:
+        """
+        A better approach with a two-ends queue
+        """
+        left, right = 0, len(s) - 1
+
+        # trim the spaces on the left
+        while left <= right and s[left] == ' ':
+            left += 1
+
+        # trim the spaces on the right
+        while left <= right and s[right] == ' ':
+            right -= 1
+
+        d, word = collections.deque(), []
+
+        # push the word onto the front of the queue
+        while left <= right:
+            if s[left] == ' ' and word:
+                d.appendleft(''.join(word))
+                word = []
+            elif s[left] != ' ':
+                word.append(s[left])
+
+            left += 1
+
+        d.appendleft(''.join(word))
+
+        return ' '.join(d)
+
+    @staticmethod
+    def reverse_words_1(s: str) -> str:
+        """
+        Leet code # 151
+        Given an input string s, reverse the order of the words.
+
+        A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+
+        Return a string of the words in reverse order concatenated by a single space.
+
+        Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string
+        should only have a single space separating the words. Do not include any extra spaces.
+        """
+        ll = LCArray.trim_space(s)
+        LCArray.reverse(ll, 0, len(ll) - 1)
+        LCArray.reverse_each_word(ll)
+
+        return ''.join(ll)
+
+    @staticmethod
+    def reverse(l: list, left: int, right: int) -> None:
+        while left < right:
+            l[left], l[right] = l[right], l[left]
+            left, right = left + 1, right - 1
+
+    @staticmethod
+    def reverse_each_word(l: list) -> None:
+        n = len(l)
+        start = end = 0
+
+        # go the end of each word
+        while start < n:
+            while end < n and l[end] != ' ':
+                end += 1
+
+            # reverse a word
+            LCArray.reverse(l, start, end - 1)
+
+            start = end + 1
+            end += 1
+
+    @staticmethod
+    def trim_space(s: str) -> list:
+        left, right = 0, len(s) - 1
+
+        # trim the spaces on the left
+        while left <= right and s[left] == ' ':
+            left += 1
+
+        # trim the spaces on the right
+        while left <= right and s[right] == ' ':
+            right -= 1
+
+        # trim the spaces in the string
+        output = []
+        while left <= right:
+            if s[left] != ' ':
+                output.append(s[left])
+            elif output[-1] != ' ':
+                output.append(s[left])
+
+            left += 1
+
+        return output
 
     @staticmethod
     def longest_common_prefix_3(strs: List[str]) -> str:
