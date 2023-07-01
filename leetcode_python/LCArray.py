@@ -6,6 +6,38 @@ from typing import List
 class LCArray:
 
     @staticmethod
+    def zigzag_convert(s: str, num_rows: int) -> str:
+        """
+        Leet Code # 5
+
+        The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this:
+        (you may want to display this pattern in a fixed font for better legibility)
+
+        P   A   H   N
+        A P L S I I G
+        Y   I   R
+
+        And then read line by line: "PAHNAPLSIIGYIR"
+
+        Write the code that will take a string and make this conversion given a number of rows:
+        """
+        n, r = len(s), num_rows
+
+        if r == 1 or r >= n:
+            return s
+
+        t = r * 2 - 2
+        ans = []
+
+        for i in range(r):  # for each row in the matrix
+            for j in range(0, n - i, t):  # starting index for each iteration
+                ans.append(s[j + i])  # the first char for current iteration
+                if 0 < i < r - 1 and j + t - i < n:
+                    ans.append(s[j + t - i])  # the second char for current iteration
+
+        return ''.join(ans)
+
+    @staticmethod
     def reverse_words_2(s: str) -> str:
         """
         A better approach with a two-ends queue
