@@ -6,6 +6,34 @@ from typing import List
 class LCArray:
 
     @staticmethod
+    def str_str(haystack: str, needle: str) -> int:
+        """
+        Leet Code # 28
+
+        Given two strings needle and haystack, return the index of the first occurrence of needle in haystack,
+        or -1 if needle is not part of haystack.
+        """
+        n, m = len(haystack), len(needle)
+
+        # iterate through haystack
+        for i in range(n - m + 1):
+            flag = True
+
+            # check if needle matches the substring of haystack
+            for j in range(m):
+                if haystack[i + j] != needle[j]:
+                    flag = False
+                    break
+
+            # if needle matches, return the starting index
+            if flag:
+                return i
+
+        # if needle not found, return -1
+        return -1
+
+
+    @staticmethod
     def zigzag_convert(s: str, num_rows: int) -> str:
         """
         Leet Code # 5
