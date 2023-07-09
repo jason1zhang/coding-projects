@@ -4,7 +4,6 @@ from typing import List
 
 
 class LCArray:
-
     @staticmethod
     def str_str(haystack: str, needle: str) -> int:
         """
