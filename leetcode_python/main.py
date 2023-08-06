@@ -4,8 +4,8 @@ from LC2Pointer import LC2Pointer
 
 
 if __name__ == '__main__':
-    height = [1,8,6,2,5,4,8,3,7]
-    print(LC2Pointer.max_area(height))
+    nums = [-1, 0, 1, 2, -1, -4]
+    print(LC2Pointer.three_sum(nums))
 
 
 

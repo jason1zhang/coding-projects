@@ -1,6 +1,42 @@
 
 
 class LC2Pointer:
+
+    @staticmethod
+    def three_sum(nums: list[int]) -> list[list[int]]:
+        """
+        Leet code # 15
+
+        Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]]
+        such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+        Notice that the solution set must not contain duplicate triplets.
+        """
+        n = len(nums)
+        nums.sort()
+        answer = list()
+
+        for first in range(n):
+            if first > 0 and nums[first] == nums[first - 1]:
+                continue
+
+            third = n - 1
+            target = -nums[first]
+            for second in range(first + 1, n):
+                if second > first + 1 and nums[second] == nums[second - 1]:
+                    continue
+
+                while second < third and nums[second] + nums[third] > target:
+                    third -= 1
+
+                if second == third:
+                    break
+
+                if nums[second] + nums[third] == target:
+                    answer.append([nums[first], nums[second], nums[third]])
+
+        return answer
+
     @staticmethod
     def max_area(height: list[int]) -> int:
         """
