@@ -1,7 +1,6 @@
 
 
 class LC2Pointer:
-
     @staticmethod
     def three_sum(nums: list[int]) -> list[list[int]]:
         """
