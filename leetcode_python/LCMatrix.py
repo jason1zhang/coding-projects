@@ -4,6 +4,27 @@ from typing import List
 class LCMatrix:
 
     @staticmethod
+    def set_zeroes(matrix: List[List[int]]) -> None:
+        """
+        Leet Code # 73
+        Given an m x n integer matrix, if an element is 0, set its entire row and column to 0's.
+
+        You must do it in place.
+        """
+        m, n = len(matrix), len(matrix[0])
+        row, col = [False] * m, [False] * n
+
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] == 0:
+                    row[i] = col[j] = True
+
+        for i in range(m):
+            for j in range(n):
+                if row[i] or col[j]:
+                    matrix[i][j] = 0
+
+    @staticmethod
     def rotate(matrix: List[List[int]]) -> None:
         """
         Leet Code # 48
