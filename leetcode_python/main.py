@@ -6,10 +6,10 @@ from LCMatrix import LCMatrix
 
 
 if __name__ == '__main__':
-    matrix =  [[1,1,1],[1,0,1],[1,1,1]]
+    board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]
 
-    LCMatrix.set_zeroes(matrix)
-    print(matrix)
+    LCMatrix.game_of_life(board)
+    print(board)
 
 
 
