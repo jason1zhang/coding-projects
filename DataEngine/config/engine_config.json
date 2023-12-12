@@ -1,0 +1,9 @@
+{
+    "user_name": "xzhang01",
+    "password": "xzhang01",
+    "hdmi_queue": "hdmi-default",
+    "sql_config_file": "./config/engine_sql_config.json",
+    "subject": "Data Engine",
+    "email_sender": "jason1_zhang@",
+    "email_receipt": ["jason1_zhang@"]
+}

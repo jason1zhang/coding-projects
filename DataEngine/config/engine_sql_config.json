@@ -1,0 +1,22 @@
+{
+    "query_srp_ic": {
+        "sql_file": "./sql/template_srp_ic.sql",
+        "target_table": "P_DATA_T.SRP_IC",
+        "target_delete_period": "ic_srp_trans_dt",
+        "target_attribute": "ic_srp_cnt",
+        "table_prefix": "P_DATA_T.SRP_IC",
+        "start_date": "2023-01-01",
+        "end_date": "2023-12-31",
+        "is_run": 0
+    },
+    "query_srp_ac": {
+        "sql_file": "./sql/template_srp_ac.sql",
+        "target_table": "P_DATA_T.SRP_AC",
+        "target_delete_period": "ac_srp_trans_dt",
+        "target_attribute": "ac_srp_cnt",
+        "table_prefix": "P_DATA_T.SRP_AC",
+        "start_date": "2023-01-01",
+        "end_date": "current_date",
+        "is_run": 1
+    }
+}
