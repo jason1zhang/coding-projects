@@ -120,3 +120,7 @@ if __name__ == '__main__':
 
     print(result1)  # 输出：8
     print(result2)  # 输出：24
+
+    numbers = [1, 3, 6]
+    newNumbers = tuple(map(lambda x: x, numbers))
+    print(newNumbers)

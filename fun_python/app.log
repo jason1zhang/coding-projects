@@ -4,3 +4,9 @@
 2023-12-25 09:58:41,839 - __main__ - INFO - Function add returned 8
 2023-12-25 09:58:41,839 - __main__ - INFO - Calling function multiply with arguments (4, 6), {}
 2023-12-25 09:58:41,839 - __main__ - INFO - Function multiply returned 24
+2024-04-19 14:17:38,210 - __main__ - INFO - Calling function add with arguments (3, 5), {}
+2024-04-19 14:17:38,263 - __main__ - INFO - Function add returned 8
+2024-04-19 14:17:38,263 - __main__ - INFO - Calling function add with arguments (3, 5), {}
+2024-04-19 14:17:38,280 - __main__ - INFO - Function add returned 8
+2024-04-19 14:17:38,280 - __main__ - INFO - Calling function multiply with arguments (4, 6), {}
+2024-04-19 14:17:38,280 - __main__ - INFO - Function multiply returned 24
